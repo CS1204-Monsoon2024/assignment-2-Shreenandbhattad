@@ -5,12 +5,11 @@
 class HashTable {
 private:
     std::vector<int> table;
-    std::vector<bool> deleted; // To mark deleted elements
+    std::vector<bool> deleted;
     int size;
-    int count; // Number of elements in the hash table
+    int count;
     const double loadFactorThreshold = 0.8;
 
-    // Helper function to find next prime greater than n
     int nextPrime(int n) {
         while (true) {
             n++;
@@ -18,7 +17,6 @@ private:
         }
     }
 
-    // Check if a number is prime
     bool isPrime(int n) {
         if (n < 2) return false;
         for (int i = 2; i <= std::sqrt(n); i++) {
@@ -27,15 +25,13 @@ private:
         return true;
     }
 
-    // Hash function
     int hash(int key) {
         return key % size;
     }
 
-    // Resize the table when load factor exceeds threshold
     void resize() {
         int oldSize = size;
-        size = nextPrime(size * 2); // Resize to next prime greater than twice the old size
+        size = nextPrime(size * 2);
         std::vector<int> oldTable = table;
         std::vector<bool> oldDeleted = deleted;
 
@@ -51,13 +47,11 @@ private:
     }
 
 public:
-    // Constructor
     HashTable(int initSize = 5) : size(initSize), count(0) {
         table.resize(size, -1);
         deleted.resize(size, false);
     }
 
-    // Insert key into hash table
     void insert(int key) {
         if (count + 1 > loadFactorThreshold * size) {
             resize();
@@ -85,7 +79,6 @@ public:
         count++;
     }
 
-    // Remove key from hash table
     void remove(int key) {
         int idx = hash(key);
         int i = 0;
@@ -103,14 +96,13 @@ public:
         count--;
     }
 
-    // Search for a key in the hash table
     int search(int key) {
         int idx = hash(key);
         int i = 0;
 
         while (table[(idx + i * i) % size] != key) {
             if (table[(idx + i * i) % size] == -1 || i > size / 2) {
-                return -1; // Key not found
+                return -1;
             }
             i++;
         }
@@ -118,7 +110,6 @@ public:
         return (idx + i * i) % size;
     }
 
-    // Print the contents of the hash table
     void printTable() {
         for (int i = 0; i < size; i++) {
             if (table[i] != -1 && !deleted[i]) {
@@ -135,7 +126,6 @@ int main() {
     int initialSize = 7;
     HashTable ht(initialSize);
 
-    // Example test case
     ht.insert(1);
     ht.printTable();
     ht.insert(6);
