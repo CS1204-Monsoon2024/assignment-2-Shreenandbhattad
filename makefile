@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++11 -Wall
 # Default target
 default: main.out
 
-# Compile HashTable.cpp into the executable main.out
+# Compile HashTable.cpp into an executable
 main.out: HashTable.cpp
 	$(CXX) $(CXXFLAGS) -o main.out HashTable.cpp
 
