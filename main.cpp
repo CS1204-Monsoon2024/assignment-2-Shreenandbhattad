@@ -129,6 +129,10 @@ public:
         }
         std::cout << std::endl;
     }
+};
+
+#include "HashTable.cpp"
+
 int main() {
     int initialSize = 7;
     HashTable ht(initialSize);
@@ -152,4 +156,3 @@ int main() {
 
     return 0;
 }
-};
