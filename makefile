@@ -2,17 +2,17 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
-# Targets
+# Target and source files
 TARGET = main
-SRCS = main.cpp HashTable.cpp
+SRCS = main.cpp
 
-# Default target for compiling
+# Default target
 default: $(TARGET)
 
-# Compile the source files into an executable
+# Compile and link the executable
 $(TARGET): $(SRCS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET).out $(SRCS)
 
-# Clean up generated files
+# Clean up
 clean:
 	rm -f *.out
