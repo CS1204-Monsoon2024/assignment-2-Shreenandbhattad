@@ -129,24 +129,27 @@ public:
         }
         std::cout << std::endl;
     }
-};
-
-// Sample main.cpp for testing
 int main() {
-    HashTable ht(5);
-    
+    int initialSize = 7;
+    HashTable ht(initialSize);
+
+    // Example test case
     ht.insert(1);
-    ht.printTable();  // Output: - 1 - - -
-    
-    ht.insert(4);
-    ht.printTable();  // Output: - 1 - 4 -
-    
-    ht.remove(3);  // Output: Element not found
-    
-    ht.insert(4);  // Output: Duplicate key insertion is not allowed
-    
-    ht.insert(17);
-    ht.printTable();  // Output: - 1 - 4 17 -
-    
+    ht.printTable();
+    ht.insert(6);
+    ht.printTable();
+    ht.insert(15);
+    ht.printTable();
+    ht.insert(25);
+    ht.printTable();
+    ht.remove(15);
+    ht.printTable();
+    ht.insert(29);
+    ht.printTable();
+
+    int find = ht.search(22);
+    std::cout << "Found at:" << find << std::endl;
+
     return 0;
 }
+};
