@@ -4,6 +4,7 @@ int main() {
     int initialSize = 7;
     HashTable ht(initialSize);
 
+    // Example test case
     ht.insert(1);
     ht.printTable();
     ht.insert(6);
