@@ -2,7 +2,7 @@
 
 int main() {
     int initialSize = 7;
-    HashTable ht(initialSize);
+    HashTable ht(initialSize);  // Create the hash table once
 
     // Example test case
     ht.insert(1);
