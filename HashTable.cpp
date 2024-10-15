@@ -1,3 +1,4 @@
+// HashTable.cpp
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -31,22 +32,24 @@ private:
 
     void resize() {
         int oldSize = size;
-        size = nextPrime(size * 2);
+        size = nextPrime(size * 2);  // Resize to a prime number at least double the size
         std::vector<int> oldTable = table;
         std::vector<bool> oldDeleted = deleted;
 
-        table = std::vector<int>(size, -1);
+        table = std::vector<int>(size, -1);  // Initialize new table
         deleted = std::vector<bool>(size, false);
         count = 0;
 
         for (int i = 0; i < oldSize; i++) {
             if (oldTable[i] != -1 && !oldDeleted[i]) {
-                insert(oldTable[i]);
+                insert(oldTable[i]);  // Rehash and re-insert old elements
             }
         }
     }
 
 public:
+    HashTable& operator=(const HashTable&) = delete;  // Prevent copy assignment
+
     HashTable(int initSize = 5) : size(initSize), count(0) {
         table.resize(size, -1);
         deleted.resize(size, false);
@@ -54,7 +57,7 @@ public:
 
     void insert(int key) {
         if (count + 1 > loadFactorThreshold * size) {
-            resize();
+            resize();  // Resize if load factor threshold is crossed
         }
 
         int idx = hash(key);
@@ -102,7 +105,7 @@ public:
 
         while (table[(idx + i * i) % size] != key) {
             if (table[(idx + i * i) % size] == -1 || i > size / 2) {
-                return -1;
+                return -1;  // Return -1 if not found
             }
             i++;
         }
