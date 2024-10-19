@@ -1,4 +1,3 @@
-// HashTable.cpp
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -10,7 +9,6 @@ private:
     int size;
     int count;
     const double loadFactorThreshold = 0.8;
-
     int nextPrime(int n) {
         while (true) {
             n++;
@@ -40,9 +38,10 @@ private:
         deleted = std::vector<bool>(size, false);
         count = 0;
 
+        // Rehash and re-insert old elements
         for (int i = 0; i < oldSize; i++) {
             if (oldTable[i] != -1 && !oldDeleted[i]) {
-                insert(oldTable[i]);  // Rehash and re-insert old elements
+                insert(oldTable[i]);
             }
         }
     }
@@ -54,7 +53,6 @@ public:
         table.resize(size, -1);
         deleted.resize(size, false);
     }
-
     void insert(int key) {
         if (count + 1 > loadFactorThreshold * size) {
             resize();  // Resize if load factor threshold is crossed
@@ -63,7 +61,7 @@ public:
         int idx = hash(key);
         int i = 0;
         while (table[(idx + i * i) % size] != -1 && table[(idx + i * i) % size] != key) {
-            if (i > size / 2) {
+            if (i > size / 2) {  // Max probing limit
                 std::cout << "Max probing limit reached!" << std::endl;
                 return;
             }
@@ -98,7 +96,6 @@ public:
         deleted[(idx + i * i) % size] = true;
         count--;
     }
-
     int search(int key) {
         int idx = hash(key);
         int i = 0;
@@ -112,7 +109,6 @@ public:
 
         return (idx + i * i) % size;
     }
-
     void printTable() {
         for (int i = 0; i < size; i++) {
             if (table[i] != -1 && !deleted[i]) {
@@ -124,3 +120,30 @@ public:
         std::cout << std::endl;
     }
 };
+
+int main() {
+    HashTable ht(7); 
+
+    ht.insert(1);
+    ht.printTable();
+
+    ht.insert(6);
+    ht.printTable();
+
+    ht.insert(15);
+    ht.printTable();
+
+    ht.insert(25);
+    ht.printTable();
+
+    ht.remove(15);
+    ht.printTable();
+
+    ht.insert(29);
+    ht.printTable();
+
+    int find = ht.search(22);
+    std::cout << "Found at: " << find << std::endl;
+
+    return 0;
+}
