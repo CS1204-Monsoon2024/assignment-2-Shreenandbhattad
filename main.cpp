@@ -3,6 +3,7 @@
 int main() {
     HashTable ht(7);  
 
+    // Example test case
     ht.insert(1);
     ht.printTable();
 
