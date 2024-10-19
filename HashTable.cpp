@@ -31,11 +31,11 @@ private:
 
     void resize() {
         int oldSize = size;
-        size = nextPrime(size * 2);  // Resize to a prime number at least double the size
+        size = nextPrime(size * 2);
         std::vector<int> oldTable = table;
         std::vector<bool> oldDeleted = deleted;
 
-        table = std::vector<int>(size, -1);  // Initialize new table
+        table = std::vector<int>(size, -1);  
         deleted = std::vector<bool>(size, false);
         count = 0;
 
@@ -54,7 +54,7 @@ public:
 
     void insert(int key) {
         if (count + 1 > loadFactorThreshold * size) {
-            resize();  // Resize if load factor threshold is crossed
+            resize();  
         }
 
         int idx = hash(key);
@@ -102,7 +102,7 @@ public:
 
         while (table[(idx + i * i) % size] != key) {
             if (table[(idx + i * i) % size] == -1 || i > size / 2) {
-                return -1;  // Return -1 if not found
+                return -1; 
             }
             i++;
         }
