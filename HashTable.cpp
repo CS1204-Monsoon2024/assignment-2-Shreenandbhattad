@@ -47,8 +47,6 @@ private:
     }
 
 public:
-    HashTable& operator=(const HashTable&) = delete;  // Prevent copy assignment
-
     HashTable(int initSize = 5) : size(initSize), count(0) {
         table.resize(size, -1);
         deleted.resize(size, false);
